@@ -5,9 +5,9 @@ const PORT = 3004;
 const app = express();
 
 // parse incoming string or array data
-// app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true}));
 // parse incoming JSON data
-// app.use(express.json());
+app.use(express.json());
 
 console.log(notes);
 
@@ -16,6 +16,11 @@ app.get('/api/notes', (req, res) => {
     res.json(notes);
 });
 
+app.post('/api/notes', (req, res) => {
+    // set id based on what the next index of the array will be
+    req.body.id = notes.length.toString();
+    res.json(req.body);
+});
 
 // serves index.html page
 app.get('/', (req, res) => {
