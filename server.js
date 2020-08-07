@@ -12,6 +12,7 @@ app.use(express.json());
 
 console.log(notes);
 
+// This function takes req.body from notes post api and adds input to my json file
 function createNewNote(body, notesArray) {
     const newNote = body;
     notesArray.push(newNote);
@@ -45,7 +46,6 @@ app.get('/', (req, res) => {
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
-
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
