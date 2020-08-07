@@ -14,7 +14,7 @@ This is a tool for organized note taking. Notes are kept on a server in a json f
 * JQuery
 
 ## Mockup
-![](/Develop/public/assets/images/mockup.PNG)
+![](/Develop/public/assets/images/mockup.png)
 
 
 ## Github Repository
