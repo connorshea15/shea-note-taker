@@ -5,12 +5,12 @@ const notes = require('./Develop/db/db.json');
 const PORT = 3004;
 const app = express();
 
+app.use(express.static('Develop/public'));
+
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true}));
 // parse incoming JSON data
 app.use(express.json());
-
-console.log(notes);
 
 // This function takes req.body from notes post api and adds input to my json file
 function createNewNote(body, notesArray) {
@@ -19,7 +19,7 @@ function createNewNote(body, notesArray) {
     // Add this new note to our notes json file
     fs.writeFileSync(
         path.join(__dirname, './Develop/db/db.json'),
-        JSON.stringify({ notes: notesArray }, null, 2)
+        JSON.stringify(notesArray, null, 2)
     );
     return body;
 }
