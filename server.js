@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const notes = require('./Develop/db/db');
 const PORT = 3004;
 const app = express();
@@ -11,6 +12,17 @@ app.use(express.json());
 
 console.log(notes);
 
+function createNewNote(body, notesArray) {
+    const newNote = body;
+    notesArray.push(newNote);
+    // Add this new note to our notes json file
+    fs.writeFileSync(
+        path.join(__dirname, './Develop/db/db'),
+        JSON.stringify({ notes: notesArray }, null, 2)
+    );
+    return body;
+}
+
 // api call to get notes in json format
 app.get('/api/notes', (req, res) => {
     res.json(notes);
@@ -19,6 +31,8 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     // set id based on what the next index of the array will be
     req.body.id = notes.length.toString();
+    // call function to add the new note to our notes json file
+    const note = createNewNote(req.body, notes);
     res.json(req.body);
 });
 
