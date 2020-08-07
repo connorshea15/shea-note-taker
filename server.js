@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const notes = require('./Develop/db/db');
+const notes = require('./Develop/db/db.json');
 const PORT = 3004;
 const app = express();
 
@@ -18,7 +18,7 @@ function createNewNote(body, notesArray) {
     notesArray.push(newNote);
     // Add this new note to our notes json file
     fs.writeFileSync(
-        path.join(__dirname, './Develop/db/db'),
+        path.join(__dirname, './Develop/db/db.json'),
         JSON.stringify({ notes: notesArray }, null, 2)
     );
     return body;
